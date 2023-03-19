@@ -232,9 +232,9 @@ def custom_ang_round(b):
 def check_new_node(x,y,theta,total_cost,cost_to_go,cost_to_come):
     if not visited_nodes[int(2*x)][int(2*y)][int(theta/30)]:
         for i in range(len(list(explored_nodes.keys()))):
-            if list(explored_nodes.keys())[i] == (x,y):
-                if list(explored_nodes.val())[i][0] > total_cost:
-                    explored_nodes[(list(explored_nodes.keys())[i])] = (total_cost,cost_to_go,cost_to_come)
+            if list(explored_nodes.keys())[i] == (x,y,theta):
+                if list(explored_nodes.values())[i][0] > total_cost:
+                    explored_nodes[(list(explored_nodes.keys())[i])] = total_cost,cost_to_go,cost_to_come
                     return None
                 else:
                     return None
