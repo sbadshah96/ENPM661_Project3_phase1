@@ -322,6 +322,15 @@ def action5(pop,index):
         # print('New Total cost for action5: ',new_total_cost)
         check_new_node(x_new,y_new,theta_new,new_total_cost,new_cost_to_go,new_cost_to_come)
 
+# Backtrack to find the optimal path
+def backtracking(x,y):
+    backtrack.append((x,y))
+    key = node_records[(x,y)]
+    backtrack.append(key)
+    while key!=(init_pos[0],init_pos[1]):
+        key = node_records[key]
+        backtrack.append(key)
+    return backtrack[::-1]
 
 # Global initializations
 obstacle_buffer = int(input('Obstacle buffer value in integer: '))
@@ -390,9 +399,11 @@ if __name__ == '__main__' :
                     #     break
             
             else:
-                end = time.time()
                 print('Goal Reached!')
                 print('Last Pop: ',pop)
+                the_path = backtracking(pop[0][0],pop[0][1])
+                print('Backtracking: ',the_path)
+                end = time.time()
                 # print('Visited nodes: ',np.nonzero(visited_nodes))
                 # print('Explored nodes: ',list(explored_nodes.items()))
                 break
