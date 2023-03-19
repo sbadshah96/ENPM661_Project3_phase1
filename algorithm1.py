@@ -219,6 +219,10 @@ def custom_coord_round(a):
         return int(a) + 1
 
 def custom_ang_round(b):
+    if b>360:
+        b -= 360
+    if b<0:
+        b += 360
     c = b%30
     if c!=0:
         return int(b-c)
@@ -243,12 +247,14 @@ def action1(pop,index):
     theta_new = custom_ang_round(theta + 60)
     x_new = custom_coord_round(x + step_size*(np.cos(np.deg2rad(theta_new))))
     y_new = custom_coord_round(y + step_size*(np.sin(np.deg2rad(theta_new))))
-    
     obs = check_obstacles(x_new,y_new)
+    # print('New theta after action1: ',theta_new)
+
     if obs:
         new_cost_to_go = round(np.sqrt(((x_new-x_f)**2) + ((y_new-y_f)**2)),1)
         new_cost_to_come = round(cost_to_come + step_size,1)
         new_total_cost = round(new_cost_to_go + new_cost_to_come,1)
+        # print('New Total cost for action1: ',new_total_cost)
         check_new_node(x_new,y_new,theta_new,new_total_cost,new_cost_to_go,new_cost_to_come)
 
 def action2(pop,index):
@@ -257,12 +263,14 @@ def action2(pop,index):
     theta_new = custom_ang_round(theta + 30)
     x_new = custom_coord_round(x + step_size*(np.cos(np.deg2rad(theta_new))))
     y_new = custom_coord_round(y + step_size*(np.sin(np.deg2rad(theta_new))))
-    
     obs = check_obstacles(x_new,y_new)
+    # print('New theta after action2: ',theta_new)
+
     if obs:
         new_cost_to_go = round(np.sqrt(((x_new-x_f)**2) + ((y_new-y_f)**2)),1)
         new_cost_to_come = round(cost_to_come + step_size,1)
         new_total_cost = round(new_cost_to_go + new_cost_to_come,1)
+        # print('New Total cost for action2: ',new_total_cost)
         check_new_node(x_new,y_new,theta_new,new_total_cost,new_cost_to_go,new_cost_to_come)
 
 def action3(pop,index):
@@ -271,13 +279,15 @@ def action3(pop,index):
     theta_new = custom_ang_round(theta)
     x_new = custom_coord_round(x + step_size*(np.cos(np.deg2rad(theta_new))))
     y_new = custom_coord_round(y + step_size*(np.sin(np.deg2rad(theta_new))))
-
     obs = check_obstacles(x_new,y_new)
+    # print('New theta after action3: ',theta_new)
+
     if obs:
         new_cost_to_go = round(np.sqrt(((x_new-x_f)**2) + ((y_new-y_f)**2)),1)
         # print('NCG: ',new_cost_to_go)
         new_cost_to_come = round(cost_to_come + step_size,1)
         new_total_cost = round(new_cost_to_go + new_cost_to_come,1)
+        # print('New Total cost for action3: ',new_total_cost)
         check_new_node(x_new,y_new,theta_new,new_total_cost,new_cost_to_go,new_cost_to_come)
 
 def action4(pop,index):
@@ -286,12 +296,14 @@ def action4(pop,index):
     theta_new = custom_ang_round(theta - 30)
     x_new = custom_coord_round(x + step_size*(np.cos(np.deg2rad(theta_new))))
     y_new = custom_coord_round(y + step_size*(np.sin(np.deg2rad(theta_new))))
-    
     obs = check_obstacles(x_new,y_new)
+    # print('New theta after action4: ',theta_new)
+
     if obs:
         new_cost_to_go = round(np.sqrt(((x_new-x_f)**2) + ((y_new-y_f)**2)),1)
         new_cost_to_come = round(cost_to_come + step_size,1)
         new_total_cost = round(new_cost_to_go + new_cost_to_come,1)
+        # print('New Total cost for action4: ',new_total_cost)
         check_new_node(x_new,y_new,theta_new,new_total_cost,new_cost_to_go,new_cost_to_come)
 
 def action5(pop,index):
@@ -300,12 +312,14 @@ def action5(pop,index):
     theta_new = custom_ang_round(theta - 60)
     x_new = custom_coord_round(x + step_size*(np.cos(np.deg2rad(theta_new))))
     y_new = custom_coord_round(y + step_size*(np.sin(np.deg2rad(theta_new))))
-    
     obs = check_obstacles(x_new,y_new)
+    # print('New theta after action5: ',theta_new)
+
     if obs:
         new_cost_to_go = round(np.sqrt(((x_new-x_f)**2) + ((y_new-y_f)**2)),1)
         new_cost_to_come = round(cost_to_come + step_size,1)
         new_total_cost = round(new_cost_to_go + new_cost_to_come,1)
+        # print('New Total cost for action5: ',new_total_cost)
         check_new_node(x_new,y_new,theta_new,new_total_cost,new_cost_to_go,new_cost_to_come)
 
 
@@ -346,14 +360,15 @@ if __name__ == '__main__' :
 
     if check_obstacles(x_s,y_s) and check_obstacles(x_f,y_f):
         explored_nodes[(x_s,y_s,theta_s)] = 0,0,0
-        print(explored_nodes.peekitem())
+        print('Explored nodes list at the beginning: ',explored_nodes.peekitem())
         while bool(list(explored_nodes)):
             pop = explored_nodes.popitem()
+            print('Pop: ',pop)
             if pop[0][0] != x_f or pop[0][1] != y_f:
                 if not visited_nodes[int(2*pop[0][0])][int(2*pop[0][1])][int(pop[0][2]/30)]:
                     visited_nodes[int(2*pop[0][0])][int(2*pop[0][1])][int(pop[0][2]/30)] = 1
                     robot_pos = (pop[0][0],pop[0][1],pop[0][2])
-                    print('Robot pos: ',robot_pos)
+                    # print('Robot pos: ',robot_pos)
                     
                     index+=1
                     action1(pop,index)
@@ -369,6 +384,9 @@ if __name__ == '__main__' :
 
                     index+=1
                     action5(pop,index)
+
+                    if index==200:
+                        break
             
             else:
                 end = time.time()
