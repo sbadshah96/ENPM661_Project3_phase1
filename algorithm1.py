@@ -359,6 +359,7 @@ if __name__ == '__main__' :
     start = time.time()
 
     if check_obstacles(x_s,y_s) and check_obstacles(x_f,y_f):
+        print('A-starring........')
         explored_nodes[(x_s,y_s,theta_s)] = 0,0,0
         print('Explored nodes list at the beginning: ',explored_nodes.peekitem())
         while bool(list(explored_nodes)):
