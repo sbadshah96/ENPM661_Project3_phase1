@@ -219,19 +219,13 @@ def custom_coord_round(a):
         return int(a) + 1
 
 def custom_ang_round(b):
-    # print('b: ',b)
     c = b%30
     if c!=0:
-        # print('c1: ',c)
         return int(b-c)
     else:
-        # print('c2: ',c)
         return int(b)
 
 def check_new_node(x,y,theta,total_cost,cost_to_go,cost_to_come):
-    # print('x: ',2*x)
-    # print('y: ',2*y)
-    # print('theta: ',theta)
     if not visited_nodes[int(2*x)][int(2*y)][int(theta/30)]:
         for i in range(len(list(explored_nodes.keys()))):
             if list(explored_nodes.keys())[i] == (x,y):
@@ -244,134 +238,74 @@ def check_new_node(x,y,theta,total_cost,cost_to_go,cost_to_come):
         node_records[(x,y)] = (pop[0][0],pop[0][1])
 
 def action1(pop,index):
-    # print('index: ',index)
     x,y,theta = pop[0]
-    # print('pop[0]: ',pop[0])
-    # total_cost = list(pop.values())[0][0]
-    # cost_to_go = list(pop.values())[0][1]
     cost_to_come = pop[1][2]
-    # print('Cost to come: ',cost_to_come)
-    # theta = 60
-    # print('theta: ', theta)
     theta_new = custom_ang_round(theta + 60)
     x_new = custom_coord_round(x + step_size*(np.cos(np.deg2rad(theta_new))))
     y_new = custom_coord_round(y + step_size*(np.sin(np.deg2rad(theta_new))))
-    # theta_new = custom_ang_round(theta_new)
     
     obs = check_obstacles(x_new,y_new)
     if obs:
         new_cost_to_go = round(np.sqrt(((x_new-x_f)**2) + ((y_new-y_f)**2)),1)
         new_cost_to_come = round(cost_to_come + step_size,1)
         new_total_cost = round(new_cost_to_go + new_cost_to_come,1)
-        # new_node = heapdict.heapdict()
-        # print('x_new: ',x_new)
-        # print('y_new: ',y_new)
-        # print('theta_new: ',theta_new)
         check_new_node(x_new,y_new,theta_new,new_total_cost,new_cost_to_go,new_cost_to_come)
 
 def action2(pop,index):
-    # print('index: ',index)
     x,y,theta = pop[0]
-    # print('pop[0]: ',pop[0])
-    # total_cost = list(pop.values())[0][0]
-    # cost_to_go = list(pop.values())[0][1]
     cost_to_come = pop[1][2]
-    # print('Cost to come: ',cost_to_come)
-    # theta = 60
-    # print('theta: ', theta)
     theta_new = custom_ang_round(theta + 30)
     x_new = custom_coord_round(x + step_size*(np.cos(np.deg2rad(theta_new))))
     y_new = custom_coord_round(y + step_size*(np.sin(np.deg2rad(theta_new))))
-    # theta_new = custom_ang_round(theta_new)
     
     obs = check_obstacles(x_new,y_new)
     if obs:
         new_cost_to_go = round(np.sqrt(((x_new-x_f)**2) + ((y_new-y_f)**2)),1)
         new_cost_to_come = round(cost_to_come + step_size,1)
         new_total_cost = round(new_cost_to_go + new_cost_to_come,1)
-        # new_node = heapdict.heapdict()
-        # print('x_new: ',x_new)
-        # print('y_new: ',y_new)
-        # print('theta_new: ',theta_new)
         check_new_node(x_new,y_new,theta_new,new_total_cost,new_cost_to_go,new_cost_to_come)
 
 def action3(pop,index):
-    # print('index: ',index)
     x,y,theta = pop[0]
-    # print('pop[0]: ',pop[0])
-    # total_cost = list(pop.values())[0][0]
-    # cost_to_go = list(pop.values())[0][1]
     cost_to_come = pop[1][2]
-    # print('Cost to come: ',cost_to_come)
-    # theta = 60
-    # print('theta: ', theta)
     theta_new = custom_ang_round(theta)
     x_new = custom_coord_round(x + step_size*(np.cos(np.deg2rad(theta_new))))
     y_new = custom_coord_round(y + step_size*(np.sin(np.deg2rad(theta_new))))
-    # theta_new = custom_ang_round(theta_new)
-    
+
     obs = check_obstacles(x_new,y_new)
     if obs:
         new_cost_to_go = round(np.sqrt(((x_new-x_f)**2) + ((y_new-y_f)**2)),1)
-        print('NCG: ',new_cost_to_go)
+        # print('NCG: ',new_cost_to_go)
         new_cost_to_come = round(cost_to_come + step_size,1)
         new_total_cost = round(new_cost_to_go + new_cost_to_come,1)
-        # new_node = heapdict.heapdict()
-        # print('x_new: ',x_new)
-        # print('y_new: ',y_new)
-        # print('theta_new: ',theta_new)
         check_new_node(x_new,y_new,theta_new,new_total_cost,new_cost_to_go,new_cost_to_come)
 
 def action4(pop,index):
-    # print('index: ',index)
     x,y,theta = pop[0]
-    # print('pop[0]: ',pop[0])
-    # total_cost = list(pop.values())[0][0]
-    # cost_to_go = list(pop.values())[0][1]
     cost_to_come = pop[1][2]
-    # print('Cost to come: ',cost_to_come)
-    # theta = 60
-    # print('theta: ', theta)
     theta_new = custom_ang_round(theta - 30)
     x_new = custom_coord_round(x + step_size*(np.cos(np.deg2rad(theta_new))))
     y_new = custom_coord_round(y + step_size*(np.sin(np.deg2rad(theta_new))))
-    # theta_new = custom_ang_round(theta_new)
     
     obs = check_obstacles(x_new,y_new)
     if obs:
         new_cost_to_go = round(np.sqrt(((x_new-x_f)**2) + ((y_new-y_f)**2)),1)
         new_cost_to_come = round(cost_to_come + step_size,1)
         new_total_cost = round(new_cost_to_go + new_cost_to_come,1)
-        # new_node = heapdict.heapdict()
-        # print('x_new: ',x_new)
-        # print('y_new: ',y_new)
-        # print('theta_new: ',theta_new)
         check_new_node(x_new,y_new,theta_new,new_total_cost,new_cost_to_go,new_cost_to_come)
 
 def action5(pop,index):
-    # print('index: ',index)
     x,y,theta = pop[0]
-    # print('pop[0]: ',pop[0])
-    # total_cost = list(pop.values())[0][0]
-    # cost_to_go = list(pop.values())[0][1]
     cost_to_come = pop[1][2]
-    # print('Cost to come: ',cost_to_come)
-    # theta = 60
-    # print('theta: ', theta)
     theta_new = custom_ang_round(theta - 60)
     x_new = custom_coord_round(x + step_size*(np.cos(np.deg2rad(theta_new))))
     y_new = custom_coord_round(y + step_size*(np.sin(np.deg2rad(theta_new))))
-    # theta_new = custom_ang_round(theta_new)
     
     obs = check_obstacles(x_new,y_new)
     if obs:
         new_cost_to_go = round(np.sqrt(((x_new-x_f)**2) + ((y_new-y_f)**2)),1)
         new_cost_to_come = round(cost_to_come + step_size,1)
         new_total_cost = round(new_cost_to_go + new_cost_to_come,1)
-        # new_node = heapdict.heapdict()
-        # print('x_new: ',x_new)
-        # print('y_new: ',y_new)
-        # print('theta_new: ',theta_new)
         check_new_node(x_new,y_new,theta_new,new_total_cost,new_cost_to_go,new_cost_to_come)
 
 
@@ -397,7 +331,7 @@ step_size = int(input('Step size between 1 and 10 in integer: '))
 # variable initialization - SOME VARIABLES MAY BE CHANGED/REMOVED LATER
 explored_nodes = heapdict.heapdict()
 explored_mapping = []
-visited_nodes = np.zeros((500,1200,12))
+visited_nodes = np.zeros((1200,500,12))
 backtrack = []
 back_points = []
 node_records = {}
@@ -405,7 +339,7 @@ pop = []
 index = 0
 the_path = []
 robot_pos = (0,0,0)
-# print('I\'m here 1')
+
 # The A* algorithm
 if __name__ == '__main__' :
     start = time.time()
@@ -413,22 +347,16 @@ if __name__ == '__main__' :
     if check_obstacles(x_s,y_s) and check_obstacles(x_f,y_f):
         explored_nodes[(x_s,y_s,theta_s)] = 0,0,0
         print(explored_nodes.peekitem())
-        # print('I\'m here 2')
-        # print(bool(list(explored_nodes)))
         while bool(list(explored_nodes)):
             pop = explored_nodes.popitem()
-            # print('I\'m here 3')
             if pop[0][0] != x_f or pop[0][1] != y_f:
-                # print('I\'m here 5')
                 if not visited_nodes[int(2*pop[0][0])][int(2*pop[0][1])][int(pop[0][2]/30)]:
-                    # print('I\'m here 6')
                     visited_nodes[int(2*pop[0][0])][int(2*pop[0][1])][int(pop[0][2]/30)] = 1
                     robot_pos = (pop[0][0],pop[0][1],pop[0][2])
                     print('Robot pos: ',robot_pos)
                     
                     index+=1
                     action1(pop,index)
-                    # print('I\'m here 7')
 
                     index+=1
                     action2(pop,index)
