@@ -219,7 +219,7 @@ def custom_coord_round(a):
         return int(a) + 1
 
 def custom_ang_round(b):
-    if b>360:
+    if b>=360:
         b -= 360
     if b<0:
         b += 360
@@ -340,7 +340,7 @@ x_f = goal_pos[0]
 y_f = goal_pos[1]
 theta_f = goal_pos[2]
 
-step_size = int(input('Step size between 1 and 10 in integer: '))
+step_size = int(input('Step size between and including 1 and 10, in integer: '))
 
 # variable initialization - SOME VARIABLES MAY BE CHANGED/REMOVED LATER
 explored_nodes = heapdict.heapdict()
@@ -373,32 +373,32 @@ if __name__ == '__main__' :
                     index+=1
                     action1(pop,index)
 
-                    index+=1
+                    # index+=1
                     action2(pop,index)
 
-                    index+=1
+                    # index+=1
                     action3(pop,index)
 
-                    index+=1
+                    # index+=1
                     action4(pop,index)
 
-                    index+=1
+                    # index+=1
                     action5(pop,index)
 
-                    if index==200:
-                        break
+                    # if index==200:
+                    #     break
             
             else:
                 end = time.time()
                 print('Goal Reached!')
-                print('Pop: ',pop)
+                print('Last Pop: ',pop)
                 # print('Visited nodes: ',np.nonzero(visited_nodes))
                 # print('Explored nodes: ',list(explored_nodes.items()))
                 break
 
         if not bool(list(explored_nodes)):
             print('No solution found.')
-            print('Pop: ',pop)
+            print('Last Pop: ',pop)
             # print('Visited nodes: ',np.nonzero(visited_nodes))
             # print('Explored nodes: ',list(explored_nodes.items()))
 
