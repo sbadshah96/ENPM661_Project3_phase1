@@ -1,11 +1,8 @@
-from queue import PriorityQueue
 import heapdict
 import numpy as np
 import time
 from sortedcollections import OrderedSet
-import copy
 import pygame
-
 
 # Calculate new 'C' value for new obstacle definition.
 def calculate_new_c(m,c,buffer_val):
@@ -236,7 +233,6 @@ def visited_nodes_threshold_check(x,y,theta):
     else:
         return True
         
-
 def check_new_node(x,y,theta,total_cost,cost_to_go,cost_to_come):
     if visited_nodes_threshold_check(x,y,theta):
         explored_nodes[(x,y,theta)] = total_cost,cost_to_go,cost_to_come
@@ -387,7 +383,7 @@ if __name__ == '__main__' :
         while len(explored_nodes):
             pop = explored_nodes.popitem()
             index+=1
-            if pop[0][0] != x_f or pop[0][1] != y_f:
+            if not (x_f-1 < pop[0][0] < x_f+1 and y_f-1 < pop[0][1] < y_f+1):
                 if visited_nodes_threshold_check(pop[0][0],pop[0][1],pop[0][2]):
                     visited_nodes[int(2*pop[0][0])][int(2*pop[0][1])][int(pop[0][2]/30)] = 1
                     visited_nodes_track.add(pop[0])

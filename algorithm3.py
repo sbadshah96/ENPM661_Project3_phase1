@@ -4,7 +4,6 @@ import time
 from sortedcollections import OrderedSet
 import pygame
 
-
 # Calculate new 'C' value for new obstacle definition.
 def calculate_new_c(m,c,buffer_val):
     if m>0 and c<0:
@@ -452,16 +451,16 @@ obstacles = obstacles(obstacle_buffer,robot_size)
 # theta_s = custom_ang_round(5)
 # init_pos= (x_s,y_s)
 
-x_s = custom_coord_round(590)
+x_s = custom_coord_round(9)
 y_s = custom_coord_round(240)
 theta_s = custom_ang_round(5)
 init_pos= (x_s,y_s,theta_s)
 
-x_f = custom_coord_round(7)
-y_f = custom_coord_round(7)
+x_f = custom_coord_round(580)
+y_f = custom_coord_round(8)
 theta_f = custom_ang_round(90)
 
-step_size = 10
+step_size = 9
 
 # variable initialization - SOME VARIABLES MAY BE CHANGED/REMOVED LATER
 explored_nodes = heapdict.heapdict()
@@ -487,7 +486,7 @@ if __name__ == '__main__' :
         while len(explored_nodes):
             pop = explored_nodes.popitem()
             index+=1
-            if not x_f-1 < pop[0][0] < x_f+1 or y_f-1 < pop[0][1] < y_f+1:
+            if not (x_f-1 < pop[0][0] < x_f+1 and y_f-1 < pop[0][1] < y_f+1):
                 if visited_nodes_threshold_check(pop[0][0],pop[0][1],pop[0][2]):
                     visited_nodes[int(2*pop[0][0])][int(2*pop[0][1])][int(pop[0][2]/30)] = 1
                     visited_nodes_track.add(pop[0])
@@ -505,12 +504,10 @@ if __name__ == '__main__' :
             else:
                 print('Goal Reached!')
                 print('Last Pop: ',pop)
-                # print('Length of dict: ',len(node_records))
                 the_path = backtracking(pop[0][0],pop[0][1],pop[0][2])
                 print('Backtracking: ',the_path)
                 end = time.time()
                 print('Time: ',round((end - start),2),'s')
-                # print('obstacles: ',obstacles)
                 break
 
         if not len(explored_nodes):
