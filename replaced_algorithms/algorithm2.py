@@ -320,45 +320,45 @@ def backtracking(x,y,theta):
     return backtrack[::-1]
 
 #####Global initializations######
-obstacle_buffer = int(input('Obstacle buffer value in integer: '))
-robot_size = int(input('Size of Robot in integer: '))
-obstacles = obstacles(obstacle_buffer,robot_size)
-
-init_pos = input('Initial position (x, y & theta separated by space): ')
-init_pos = tuple(int(i) for i in init_pos.split(" "))
-x_s = custom_coord_round(init_pos[0])
-y_s = custom_coord_round(init_pos[1])
-theta_s = custom_ang_round(init_pos[2])
-init_pos = (x_s,y_s,theta_s)
-
-goal_pos = input('Goal position (x, y & theta separated by space): ')
-goal_pos = tuple(int(i) for i in goal_pos.split(" "))
-x_f = goal_pos[0]
-y_f = goal_pos[1]
-theta_f = goal_pos[2]
-
-step_size = int(input('Step size between and including 1 and 10, in integer: '))
-
-# ###### for testing only ######
-# obstacle_buffer = 2
-# robot_size = 2
+# obstacle_buffer = int(input('Obstacle buffer value in integer: '))
+# robot_size = int(input('Size of Robot in integer: '))
 # obstacles = obstacles(obstacle_buffer,robot_size)
 
-# # x_s = custom_coord_round(565)
-# # y_s = custom_coord_round(220)
-# # theta_s = custom_ang_round(5)
-# # init_pos= (x_s,y_s)
+# init_pos = input('Initial position (x, y & theta separated by space): ')
+# init_pos = tuple(int(i) for i in init_pos.split(" "))
+# x_s = custom_coord_round(init_pos[0])
+# y_s = custom_coord_round(init_pos[1])
+# theta_s = custom_ang_round(init_pos[2])
+# init_pos = (x_s,y_s,theta_s)
 
-# x_s = custom_coord_round(590)
-# y_s = custom_coord_round(240)
+# goal_pos = input('Goal position (x, y & theta separated by space): ')
+# goal_pos = tuple(int(i) for i in goal_pos.split(" "))
+# x_f = goal_pos[0]
+# y_f = goal_pos[1]
+# theta_f = goal_pos[2]
+
+# step_size = int(input('Step size between and including 1 and 10, in integer: '))
+
+# ###### for testing only ######
+obstacle_buffer = 2
+robot_size = 2
+obstacles = obstacles(obstacle_buffer,robot_size)
+
+# x_s = custom_coord_round(565)
+# y_s = custom_coord_round(220)
 # theta_s = custom_ang_round(5)
-# init_pos= (x_s,y_s,theta_s)
+# init_pos= (x_s,y_s)
 
-# x_f = custom_coord_round(7)
-# y_f = custom_coord_round(7)
-# theta_f = custom_ang_round(90)
+x_s = custom_coord_round(9)
+y_s = custom_coord_round(240)
+theta_s = custom_ang_round(5)
+init_pos= (x_s,y_s,theta_s)
 
-# step_size = 1
+x_f = custom_coord_round(580)
+y_f = custom_coord_round(8)
+theta_f = custom_ang_round(90)
+
+step_size = 1
 
 # variable initialization - SOME VARIABLES MAY BE CHANGED/REMOVED LATER
 explored_nodes = heapdict.heapdict()

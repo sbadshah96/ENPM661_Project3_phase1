@@ -502,7 +502,6 @@ if __name__ == '__main__' :
                 if visited_nodes_threshold_check(pop[0][0],pop[0][1],pop[0][2]):
                     visited_nodes[int(2*pop[0][0])][int(2*pop[0][1])][int(pop[0][2]/30)] = 1
                     
-                    
                     action1(pop)
 
                     action2(pop)
@@ -517,8 +516,7 @@ if __name__ == '__main__' :
                 print('Goal Reached!')
                 print('Last Pop: ',pop)
                 the_path = backtracking(pop[0][0],pop[0][1],pop[0][2])
-               
-                print("Node records: ",node_records)
+                # print("Node records: ",node_records)
                 print('Backtracking: ',the_path)
                 end = time.time()
                 print('Time: ',round((end - start),2),'s')
