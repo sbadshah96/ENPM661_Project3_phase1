@@ -1,4 +1,4 @@
-***a_star_shreejay_aaqib.py**
+**a_star_shreejay_aaqib.py**
 
 Shreejay Badshah (119224564 - sbadshah)
 Aaqib Barodawala (119348710 - abarodaw)

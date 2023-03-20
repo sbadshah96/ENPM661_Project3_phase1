@@ -465,7 +465,7 @@ def arrow(screen, lcolor, tricolor, start, end, trirad):
                                             end[1]+trirad*math.cos(math.radians(rotation-120))),
                                            (end[0]+trirad*math.sin(math.radians(rotation+120)), end[1]+trirad*math.cos(math.radians(rotation+120)))))
 
-#######Global initializations######
+######Global initializations######
 obstacle_buffer = int(input('Obstacle buffer value in integer (ex. 2): '))
 robot_size = int(input('Size of Robot in integer (ex. 2): '))
 obstacles = obstacles(obstacle_buffer,robot_size)
