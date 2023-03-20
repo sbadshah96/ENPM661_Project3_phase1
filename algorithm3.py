@@ -15,7 +15,9 @@ def calculate_new_c(m,c,buffer_val):
             c_new = c + ((buffer_val)*np.sqrt(1+(m**2)))
             return c_new
         elif c<300:
+            # print('c: ',c)
             c_new = c - ((buffer_val)*np.sqrt(1+(m**2)))
+            # print('c_new: ',c_new)
             return c_new
     elif m>0 and c>0:
         c_new = c + ((buffer_val)*np.sqrt(1+(m**2)))
@@ -84,7 +86,7 @@ def pygame_obstacles(obstacle_buffer):
     c5_hex_new = c5_hex - buffer_val
     obstacles.append((m5_hex,c5_hex_new))
 
-    c6_hex = 233.21
+    c6_hex = 223.21
     m6_hex = -0.577
     c6_hex_new = calculate_new_c(m6_hex,c6_hex,buffer_val)
     obstacles.append((m6_hex,c6_hex_new))
@@ -124,8 +126,6 @@ def pygame_obstacles(obstacle_buffer):
     obstacles.append((0,c4_bound))
 
     return obstacles
-
-
 
 # Define new obstacles based on user input buffer
 def obstacles(obstacle_buffer,robot_size):
@@ -188,7 +188,7 @@ def obstacles(obstacle_buffer,robot_size):
     c5_hex_new = c5_hex - buffer_val
     obstacles.append((m5_hex,c5_hex_new))
 
-    c6_hex = 233.21
+    c6_hex = 223.21
     m6_hex = -0.577
     c6_hex_new = calculate_new_c(m6_hex,c6_hex,buffer_val)
     obstacles.append((m6_hex,c6_hex_new))
@@ -303,16 +303,12 @@ def custom_coord_round(a):
         return int(a) + 1
 
 def custom_ang_round(b):
-    # print('b: ',b)
     if b>=360:
         b = b%360
-        # print('b1: ',b)
     elif -360<b<0:
         b += 360
-        # print('b2: ',b)
     elif b<=-360:
         b = b%360 + 360
-        # print('b3: ',b)
     c = b%30
     if c<15:
         return int(b-c)
@@ -341,7 +337,6 @@ def visited_nodes_threshold_check(x,y,theta):
     else:
         return True
         
-
 def check_new_node(x,y,theta,total_cost,cost_to_go,cost_to_come):
     if visited_nodes_threshold_check(x,y,theta):
         explored_nodes[(x,y,theta)] = total_cost,cost_to_go,cost_to_come
@@ -428,45 +423,45 @@ def backtracking(x,y,theta):
     return backtrack[::-1]
 
 #######Global initializations######
-obstacle_buffer = int(input('Obstacle buffer value in integer: '))
-robot_size = int(input('Size of Robot in integer: '))
-obstacles = obstacles(obstacle_buffer,robot_size)
-
-init_pos = input('Initial position (x, y & theta separated by space): ')
-init_pos = tuple(int(i) for i in init_pos.split(" "))
-x_s = custom_coord_round(init_pos[0])
-y_s = custom_coord_round(init_pos[1])
-theta_s = custom_ang_round(init_pos[2])
-init_pos = (x_s,y_s,theta_s)
-
-goal_pos = input('Goal position (x, y & theta separated by space): ')
-goal_pos = tuple(int(i) for i in goal_pos.split(" "))
-x_f = goal_pos[0]
-y_f = goal_pos[1]
-theta_f = goal_pos[2]
-
-step_size = int(input('Step size between and including 1 and 10, in integer: '))
-
-# ###### for testing only ######
-# obstacle_buffer = 2
-# robot_size = 2
+# obstacle_buffer = int(input('Obstacle buffer value in integer: '))
+# robot_size = int(input('Size of Robot in integer: '))
 # obstacles = obstacles(obstacle_buffer,robot_size)
 
-# # x_s = custom_coord_round(565)
-# # y_s = custom_coord_round(220)
-# # theta_s = custom_ang_round(5)
-# # init_pos= (x_s,y_s)
+# init_pos = input('Initial position (x, y & theta separated by space): ')
+# init_pos = tuple(int(i) for i in init_pos.split(" "))
+# x_s = custom_coord_round(init_pos[0])
+# y_s = custom_coord_round(init_pos[1])
+# theta_s = custom_ang_round(init_pos[2])
+# init_pos = (x_s,y_s,theta_s)
 
-# x_s = custom_coord_round(590)
-# y_s = custom_coord_round(240)
+# goal_pos = input('Goal position (x, y & theta separated by space): ')
+# goal_pos = tuple(int(i) for i in goal_pos.split(" "))
+# x_f = goal_pos[0]
+# y_f = goal_pos[1]
+# theta_f = goal_pos[2]
+
+# step_size = int(input('Step size between and including 1 and 10, in integer: '))
+
+# ###### for testing only ######
+obstacle_buffer = 2
+robot_size = 2
+obstacles = obstacles(obstacle_buffer,robot_size)
+
+# x_s = custom_coord_round(565)
+# y_s = custom_coord_round(220)
 # theta_s = custom_ang_round(5)
-# init_pos= (x_s,y_s,theta_s)
+# init_pos= (x_s,y_s)
 
-# x_f = custom_coord_round(7)
-# y_f = custom_coord_round(7)
-# theta_f = custom_ang_round(90)
+x_s = custom_coord_round(590)
+y_s = custom_coord_round(240)
+theta_s = custom_ang_round(5)
+init_pos= (x_s,y_s,theta_s)
 
-# step_size = 1
+x_f = custom_coord_round(7)
+y_f = custom_coord_round(7)
+theta_f = custom_ang_round(90)
+
+step_size = 10
 
 # variable initialization - SOME VARIABLES MAY BE CHANGED/REMOVED LATER
 explored_nodes = heapdict.heapdict()
@@ -492,7 +487,7 @@ if __name__ == '__main__' :
         while len(explored_nodes):
             pop = explored_nodes.popitem()
             index+=1
-            if pop[0][0] != x_f or pop[0][1] != y_f:
+            if not x_f-1 < pop[0][0] < x_f+1 or y_f-1 < pop[0][1] < y_f+1:
                 if visited_nodes_threshold_check(pop[0][0],pop[0][1],pop[0][2]):
                     visited_nodes[int(2*pop[0][0])][int(2*pop[0][1])][int(pop[0][2]/30)] = 1
                     visited_nodes_track.add(pop[0])
@@ -510,11 +505,12 @@ if __name__ == '__main__' :
             else:
                 print('Goal Reached!')
                 print('Last Pop: ',pop)
-                print('Length of dict: ',len(node_records))
+                # print('Length of dict: ',len(node_records))
                 the_path = backtracking(pop[0][0],pop[0][1],pop[0][2])
                 print('Backtracking: ',the_path)
                 end = time.time()
                 print('Time: ',round((end - start),2),'s')
+                # print('obstacles: ',obstacles)
                 break
 
         if not len(explored_nodes):

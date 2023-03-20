@@ -13,10 +13,10 @@ def calculate_new_c(m,c,buffer_val):
         c_new = c - ((buffer_val)*np.sqrt(1+(m**2)))
         return c_new
     elif m<0 and c>0:
-        if c>300:
+        if c>325:
             c_new = c + ((buffer_val)*np.sqrt(1+(m**2)))
             return c_new
-        elif c<300:
+        elif c<325:
             c_new = c - ((buffer_val)*np.sqrt(1+(m**2)))
             return c_new
     elif m>0 and c>0:
@@ -202,16 +202,12 @@ def custom_coord_round(a):
         return int(a) + 1
 
 def custom_ang_round(b):
-    # print('b: ',b)
     if b>=360:
         b = b%360
-        # print('b1: ',b)
     elif -360<b<0:
         b += 360
-        # print('b2: ',b)
     elif b<=-360:
         b = b%360 + 360
-        # print('b3: ',b)
     c = b%30
     if c<15:
         return int(b-c)
