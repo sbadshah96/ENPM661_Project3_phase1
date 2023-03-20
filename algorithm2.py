@@ -237,6 +237,7 @@ def check_new_node(x,y,theta,total_cost,cost_to_go,cost_to_come):
     if visited_nodes_threshold_check(x,y,theta):
         explored_nodes[(x,y,theta)] = total_cost,cost_to_go,cost_to_come
         node_records[(x,y,theta)] = (pop[0][0],pop[0][1],pop[0][2])
+        explored_mapping.append((x,y))
 
 def action1(pop):
     x,y,theta = pop[0]
@@ -380,6 +381,7 @@ if __name__ == '__main__' :
         init_cost_to_come = 0
         init_total_cost = init_cost_to_come + init_cost_to_go
         explored_nodes[(x_s,y_s,theta_s)] = init_total_cost,init_cost_to_go,init_cost_to_come
+        explored_mapping.append((x_s,y_s))
         while len(explored_nodes):
             pop = explored_nodes.popitem()
             index+=1
