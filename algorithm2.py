@@ -311,12 +311,12 @@ def action5(pop):
 
 # Backtrack to find the optimal path
 def backtracking(x,y,theta):
-    backtrack.append((x,y))
+    backtrack.append((x,y,theta))
     key = node_records[(x,y,theta)]
-    backtrack.append((key[0],key[1]))
+    backtrack.append(key)
     while key!=init_pos:
         key = node_records[key]
-        backtrack.append((key[0],key[1]))
+        backtrack.append(key)
     return backtrack[::-1]
 
 #####Global initializations######
