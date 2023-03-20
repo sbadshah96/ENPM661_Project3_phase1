@@ -338,9 +338,18 @@ def visited_nodes_threshold_check(x,y,theta):
         
 def check_new_node(x,y,theta,total_cost,cost_to_go,cost_to_come):
     if visited_nodes_threshold_check(x,y,theta):
+        if (x,y,theta) in explored_nodes:
+            if explored_nodes[(x,y,theta)][0] >= total_cost:
+                explored_nodes[(x,y,theta)] = total_cost,cost_to_go,cost_to_come
+                node_records[(x,y,theta)] = (pop[0][0],pop[0][1],pop[0][2])
+                visited_nodes_track.add((x,y,theta))
+                return None
+            else:
+                return None
         explored_nodes[(x,y,theta)] = total_cost,cost_to_go,cost_to_come
         node_records[(x,y,theta)] = (pop[0][0],pop[0][1],pop[0][2])
         explored_mapping.append((x,y))
+        visited_nodes_track.add((x,y,theta))
 
 def action1(pop):
     x,y,theta = pop[0]
@@ -492,7 +501,7 @@ if __name__ == '__main__' :
             if not (x_f-1 < pop[0][0] < x_f+1 and y_f-1 < pop[0][1] < y_f+1):
                 if visited_nodes_threshold_check(pop[0][0],pop[0][1],pop[0][2]):
                     visited_nodes[int(2*pop[0][0])][int(2*pop[0][1])][int(pop[0][2]/30)] = 1
-                    visited_nodes_track.add(pop[0])
+                    
                     
                     action1(pop)
 
@@ -508,6 +517,8 @@ if __name__ == '__main__' :
                 print('Goal Reached!')
                 print('Last Pop: ',pop)
                 the_path = backtracking(pop[0][0],pop[0][1],pop[0][2])
+               
+                print("Node records: ",node_records)
                 print('Backtracking: ',the_path)
                 end = time.time()
                 print('Time: ',round((end - start),2),'s')
