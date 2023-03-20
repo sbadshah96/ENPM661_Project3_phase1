@@ -65,7 +65,7 @@ def pygame_obstacles(obstacle_buffer):
     c1_hex_new = calculate_new_c(m1_hex,c1_hex,buffer_val)
     obstacles.append((m1_hex,c1_hex_new))
 
-    c2_hex = 364.5
+    c2_hex = 364.95
     m2_hex = 0
     c2_hex_new = c2_hex + buffer_val
     obstacles.append((m2_hex,c2_hex_new))
@@ -167,7 +167,7 @@ def obstacles(obstacle_buffer,robot_size):
     c1_hex_new = calculate_new_c(m1_hex,c1_hex,buffer_val)
     obstacles.append((m1_hex,c1_hex_new))
 
-    c2_hex = 364.5
+    c2_hex = 364.95
     m2_hex = 0
     c2_hex_new = c2_hex + buffer_val
     obstacles.append((m2_hex,c2_hex_new))
@@ -414,12 +414,12 @@ def action5(pop):
 
 # Backtrack to find the optimal path
 def backtracking(x,y,theta):
-    backtrack.append((x,y))
+    backtrack.append((x,y,theta))
     key = node_records[(x,y,theta)]
-    backtrack.append((key[0],key[1]))
+    backtrack.append(key)
     while key!=init_pos:
         key = node_records[key]
-        backtrack.append((key[0],key[1]))
+        backtrack.append(key)
     return backtrack[::-1]
 
 #######Global initializations######

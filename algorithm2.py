@@ -64,7 +64,7 @@ def obstacles(obstacle_buffer,robot_size):
     c1_hex_new = calculate_new_c(m1_hex,c1_hex,buffer_val)
     obstacles.append((m1_hex,c1_hex_new))
 
-    c2_hex = 364.5
+    c2_hex = 364.95
     m2_hex = 0
     c2_hex_new = c2_hex + buffer_val
     obstacles.append((m2_hex,c2_hex_new))
