@@ -6,13 +6,13 @@ Aaqib Barodawala (119348710 - abarodaw)
 This python3 script performs A* search and planning algorithm on a 600x250 canvas with obstacles
 
 The scripts includes following libraries:
--math
--heapdict
--numpy
--vidmaker
--sortedcollections
--time
--pygame
+-math\
+-heapdict\
+-numpy\
+-vidmaker\
+-sortedcollections\
+-time\
+-pygame\
 
 **To install heapDict():**
 Run below command in the terminal:
