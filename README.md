@@ -1,6 +1,6 @@
 **a_star_shreejay_aaqib.py**
 
-Shreejay Badshah (119224564 - sbadshah)
+Shreejay Badshah (119224564 - sbadshah)\
 Aaqib Barodawala (119348710 - abarodaw)
 
 This python3 script performs A* search and planning algorithm on a 600x250 canvas with obstacles
