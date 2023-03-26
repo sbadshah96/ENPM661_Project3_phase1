@@ -12,7 +12,7 @@ The scripts includes following libraries:
 -vidmaker\
 -sortedcollections\
 -time\
--pygame\
+-pygame
 
 **To install heapDict():**
 Run below command in the terminal:
